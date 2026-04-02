@@ -1,0 +1,62 @@
+.montserrat-global> {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+    display: flex;
+    flex-direction: column; 
+    width: 100dvw;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;  
+} 
+
+.titulo{ 
+    align-self: center;  
+}
+  
+.introduccion{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;  
+} 
+
+.introduccion p {
+  max-width: 800px; 
+  font-size: large;  
+}   
+
+.contenido {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  text-align: center;
+} 
+
+.input-group {
+  display: flex;
+  flex-direction: row;  
+}   
+ 
+button {
+  margin-left: 8px;  
+  border-radius: 10px;
+  border-width: 1px;  
+  width: 160px;
+  height: 30px; 
+}
+ 
+button:hover {  
+  background-color: #b9def3; 
+  cursor: pointer;  
+}
+
+button:active{ 
+  background-color: #a0c8e0; 
+}
+   

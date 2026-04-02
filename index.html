@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizacion no lineal</title>
+    <meta name="description" content="Recopilación de miniprogramas matematicos para la optimizacion no lineal">
+   <!--OPEN GRAPH-->
+    <meta property="og:title" content="Programas para la optimizacion no lineal">
+    <meta name="keywords" content="Matematica, calculo, numerico, app, univeridad, unefa, optimizacion no lineal, programacion">
+    <meta property="og:image" content="---">
+    <meta property="og:description" content="Optimizacion no lineal">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="---">
+    <link rel="icon" href="FAVICON" type="image/png">   
+
+    <meta name="robots" content="index, follow">
+    <!--Font-Family Google-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap" rel="stylesheet">
+
+    <body>
+    <section class="titulo">
+        <h1>Optimización no lineal</h1>
+    </section>
+
+
+    <section class="introduccion">
+        <h1>¿Qué son las Formas Cuadratricas de las Matrices?</h1>
+        <p>Una forma cuadrática es un polinomio de segundo grado, Q(x) = x^T A x, donde x es un vector y A es una matriz simétrica (n x n) que representa la forma. Transforman vectores en números reales, indicando la curvatura de la función, y se clasifican en definidas (positivas/negativas), indefinidas o semidefinidas según los signos de los valores propios de A.</p>
+        
+    </section>
+
+    <section class="contenido">
+        <h2>Calculadora de Forma Cuadrática</h2>
+        <p>Ingresa el tamaño de la matriz simétrica A y el vector x. La calculadora muestra Q(x) = x^T A x y una clasificación aproximada de la forma.</p>
+
+        <label for="matrixSize">Tamaño n (De 2 hasta 6):</label>
+        <div class="input-group">
+        <input type="number" id="matrixSize" min="2" max="6" value="2">
+        <button id="generateBtn" type="button">Generar campos</button>
+        </div>
+
+        <div id="matrixInputs" style="margin-top:16px;"></div>
+        <div id="vectorInputs" style="margin-top:16px;"></div>
+
+        <button id="computeBtn" type="button" style="margin-top:16px;">Calcular Q(x)</button>
+
+        <div id="result" style="margin-top:16px; font-weight:bold;"></div>
+        <div id="message" style="margin-top:8px; color:#3a3a3a;"></div>
+    </section>
+
+    <script src="script.js"></script>
+
+
+    </body>
+
+
+
+
+</html>
