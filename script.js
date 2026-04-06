@@ -5,6 +5,46 @@ const vectorInputs = document.getElementById('vectorInputs');
 const resultContainer = document.getElementById('result');
 const messageContainer = document.getElementById('message');
 
+// Función para mapear índices a nombres de variables (x, y, z, etc.)
+function getVar(i) {
+    const vars = ['x', 'y', 'z', 'w', 'u', 'v'];
+    return vars[i] || `x_{${i + 1}}`;
+}
+
+// NUEVA FUNCIÓN: Genera la cadena de texto en formato LaTeX para la ecuación
+function generateLatexEquation(A, n) {
+    let terminos = [];
+    
+    for (let i = 0; i < n; i++) {
+        for (let j = i; j < n; j++) {
+            let valor = A[i][j];
+            if (Math.abs(valor) < 1e-9) continue;
+
+            // Si es i != j, en una forma cuadrática sumamos a_ij + a_ji, o sea 2*a_ij
+            let coeficiente = (i === j) ? valor : 2 * valor;
+            let variablePart = (i === j) ? `${getVar(i)}^2` : `${getVar(i)}${getVar(j)}`;
+
+            let signo = "";
+            if (terminos.length > 0) {
+                signo = coeficiente > 0 ? " + " : " - ";
+            } else if (coeficiente < 0) {
+                signo = "-";
+            }
+
+            let valorAbs = Math.abs(coeficiente);
+            // No mostrar el "1" si acompaña a una variable, a menos que sea el único valor
+            let coefTexto = (valorAbs === 1) ? "" : valorAbs.toFixed(2).replace(/\.00$/, "");
+
+            terminos.push(`${signo}${coefTexto}${variablePart}`);
+        }
+    }
+
+    const varsHeader = Array.from({length: n}, (_, i) => getVar(i)).join(',');
+    return terminos.length > 0 
+        ? `Q(${varsHeader}) = ${terminos.join("")}` 
+        : `Q(${varsHeader}) = 0`;
+}
+
 function buildGrid(n) {
     matrixInputs.innerHTML = '<h3>Matriz A (n x n, simétrica)</h3>';
     const table = document.createElement('table');
@@ -20,6 +60,13 @@ function buildGrid(n) {
             input.style.width = '68px';
             input.id = `a_${i}_${j}`;
             input.value = (i === j ? '1' : '0');
+            
+            // Ayuda al usuario: si cambia a[i][j], cambia a[j][i] automáticamente
+            input.oninput = () => {
+                const mirror = document.getElementById(`a_${j}_${i}`);
+                if (mirror) mirror.value = input.value;
+            };
+
             cell.appendChild(input);
             row.appendChild(cell);
         }
@@ -27,7 +74,7 @@ function buildGrid(n) {
     }
     matrixInputs.appendChild(table);
 
-    vectorInputs.innerHTML = '<h3>Vector x</h3>';
+    vectorInputs.innerHTML = '<h3>Vector x (Punto de evaluación)</h3>';
     const vectorDiv = document.createElement('div');
     for (let i = 0; i < n; i++) {
         const vx = document.createElement('input');
@@ -103,54 +150,14 @@ function computeQ(A, x) {
 function classify(A) {
     let pos = 0;
     let neg = 0;
-    let cero = 0;
     const n = A.length;
-    for (let t = 0; t < 30; t++) {
+    // Aumentamos un poco las muestras para mejor precisión
+    for (let t = 0; t < 100; t++) {
         const x = Array.from({ length: n }, () => (Math.random() * 4 - 2));
         const q = computeQ(A, x);
-        if (q > 1e-6) pos++;
-        else if (q < -1e-6) neg++;
-        else cero++;
+        if (q > 1e-7) pos++;
+        else if (q < -1e-7) neg++;
     }
     if (pos > 0 && neg > 0) return 'Indefinida';
-    if (pos > 0 && neg === 0) return 'Semidefinida positiva o definida positiva';
-    if (neg > 0 && pos === 0) return 'Semidefinida negativa o definida negativa';
-    return 'Casi nula (posible semidefinida)';
-}
-
-generateBtn.addEventListener('click', () => {
-    const n = parseInt(document.getElementById('matrixSize').value, 10);
-    if (Number.isNaN(n) || n < 2 || n > 6) {
-        messageContainer.textContent = 'Ingrese un tamaño válido entre 2 y 6.';
-        return;
-    }
-    messageContainer.textContent = '';
-    buildGrid(n);
-    resultContainer.textContent = '';
-});
-
-computeBtn.addEventListener('click', () => {
-    const n = parseInt(document.getElementById('matrixSize').value, 10);
-    if (Number.isNaN(n) || n < 2 || n > 6) {
-        messageContainer.textContent = 'Ingrese un tamaño válido entre 2 y 6.';
-        return;
-    }
-
-    let A = readMatrix(n);
-    const x = readVector(n);
-
-    if (!isSymmetric(A)) {
-        messageContainer.textContent = 'Matriz A no es simétrica. Se usará la versión simétrica (A+Aᵀ)/2 para el cálculo.';
-        A = symmetrize(A);
-    } else {
-        messageContainer.textContent = '';
-    }
-
-    const q = computeQ(A, x);
-    const tipo = classify(A);
-
-    resultContainer.innerHTML = `Q(x) = <strong>${q.toFixed(6)}</strong> <br>Clasificación (aprox.): <strong>${tipo}</strong>`;
-});
-
-// inicializa una vez
-buildGrid(2);
+    if (pos > 0 && neg === 0) return 'Definida o
+                                
