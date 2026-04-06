@@ -1,4 +1,4 @@
-.montserrat-global> {
+.montserrat-global {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
@@ -42,7 +42,23 @@ body {
   display: flex;
   flex-direction: row;  
 }   
- 
+table {
+  border-collapse: collapse;
+  margin: 16px auto;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+table td {
+  border: 1px solid #999;
+  padding: 8px;
+}
+table input {
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 4px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
 button {
   margin-left: 8px;  
   border-radius: 10px;
@@ -59,4 +75,3 @@ button:hover {
 button:active{ 
   background-color: #a0c8e0; 
 }
-   
