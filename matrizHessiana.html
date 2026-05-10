@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz Hessiana</title>
+    <meta name="description" content="Recopilación de miniprogramas matematicos para la optimizacion no lineal">
+   <!--OPEN GRAPH-->
+    <meta property="og:title" content="Programas para la optimizacion no lineal">
+    <meta name="keywords" content="Matematica, calculo, numerico, app, univeridad, unefa, optimizacion no lineal, programacion">
+    <meta property="og:image" content="---">
+    <meta property="og:description" content="Matrices hessianas">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="StylesHessiana.css">
+    <link rel="canonical" href="---">
+    <link rel="icon" href="FAVICON" type="image/png">   
+
+    <meta name="robots" content="index, follow">
+    <!--Font-Family Google-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <section class="titulo">
+        <h1>Matriz Hessiana</h1>
+    </section>
+
+    <section class="introduccion">
+        <h1>Herramienta paso a paso para Hessianas</h1>
+        <p>Ingresa una función de dos variables f(x, y), evalúa sus derivadas parciales, construye la matriz Hessiana, evalúala en un punto (w, d), multiplícala por λ, y clasifica el punto usando criterios de autovalores y concavidad/convexidad.</p>
+    </section>
+
+    <section class="contenido">
+        <div class="input-card">
+            <label for="expr">Función f(x, y)</label>
+            <input id="expr" type="text" placeholder="Ej: x^2 + 3*x*y + y^2" value="x^2 + 3*x*y + y^2">
+
+            <div class="row">
+                <div>
+                    <label for="pointX">Punto crítico w (x)</label>
+                    <input id="pointX" type="number" step="any" placeholder="Opcional, dejar vacío">
+                </div>
+                <div>
+                    <label for="pointY">Punto crítico d (y)</label>
+                    <input id="pointY" type="number" step="any" placeholder="Opcional, dejar vacío">
+                </div>
+                <div>
+                    <label for="lambda">Lambda (λ)</label>
+                    <input id="lambda" type="number" step="any" value="1">
+                </div>
+            </div>
+            <p class="hint">Si no ingresas un punto crítico, el sistema lo calculará automáticamente y mostrará el proceso.</p>
+
+            <button id="computeBtn" type="button">Calcular Hessiana</button>
+            <div id="message" class="result-block"></div>
+        </div>
+
+        <div id="steps" class="steps"></div>
+    </section>
+
+    <script src="ScriptHessiana.js"></script>
+</body>
+
+</html>
